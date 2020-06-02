@@ -1,26 +1,45 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
+import Validation from './components/Validation';
+import Chart from './components/Chart'; 
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+
+  state = {
+    text: ''
+  }
+
+  handleChange = (event) => {
+    this.setState({text: event.target.value.toUpperCase()});
+  }
+
+  handleClick = (index) => {
+    const newText = this.state.text.split('');
+    newText.splice(index, 1);
+    const updatedText = newText.join('');
+    this.setState({text: updatedText});
+  }
+
+  render() {
+
+    const charList = this.state.text.split("").map((item, index) => 
+    <Chart 
+    click={() => this.handleClick(index)} 
+    key={index} 
+    char={item} 
+    />)
+    
+    return (
+      <div className="App">
+        <h1>Namasteh</h1> 
+        <input onChange={this.handleChange} type="text" value={this.state.text}/>
+        <Validation
+        num={this.state.text.length}
+        />
+        {charList}
+      </div>  
+    )
+  }  
 }
 
 export default App;

@@ -1,0 +1,11 @@
+.chart {
+    background: rgba(36, 141, 211, 0.664);
+    color: white;
+    padding: 20px;
+    margin: 16px;
+    text-align: center;
+    display: inline-block;
+    border-radius: 5px;
+    position: relative; 
+    width: 50px;
+}
